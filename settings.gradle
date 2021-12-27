@@ -1,1 +1,5 @@
 rootProject.name = 'gom'
+include 'module-session'
+include 'module-redis'
+include 'app-api'
+

@@ -1,13 +1,12 @@
-package com.minyul.gom;
+package com.minyul.api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class GomApplication {
+public class App {
 
 	public static void main(String[] args) {
-		SpringApplication.run(GomApplication.class, args);
+		SpringApplication.run(App.class, args);
 	}
-
 }
