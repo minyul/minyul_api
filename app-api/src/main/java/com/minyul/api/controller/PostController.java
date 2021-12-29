@@ -1,5 +1,6 @@
 package com.minyul.api.controller;
 
+import com.minyul.api.dto.post.PostDto;
 import com.minyul.api.facade.DomesticFacade;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,8 +19,7 @@ public class PostController {
 	private final DomesticFacade domesticFacade;
 
 	@GetMapping("/posts/{post_id}")
-	public ResponseEntity<String> retrievePost(@PathVariable(value = "post_id") final Long postId) {
-		domesticFacade.fetchPostById(postId);
-		return ResponseEntity.ok().body(null);
+	public ResponseEntity<PostDto> retrievePost(@PathVariable(value = "post_id") final Long postId) {
+		return ResponseEntity.ok(domesticFacade.fetchPostById(postId));
 	}
 }
