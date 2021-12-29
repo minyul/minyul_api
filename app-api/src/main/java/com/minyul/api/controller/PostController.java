@@ -18,8 +18,8 @@ public class PostController {
 	private final DomesticFacade domesticFacade;
 
 	@GetMapping("/posts/{post_id}")
-	public ResponseEntity<String> retrievePost(@PathVariable(value = "post_id") Long postId) {
-
+	public ResponseEntity<String> retrievePost(@PathVariable(value = "post_id") final Long postId) {
+		domesticFacade.fetchPostById(postId);
 		return ResponseEntity.ok().body(null);
 	}
 }

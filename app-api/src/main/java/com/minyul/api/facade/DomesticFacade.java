@@ -13,4 +13,8 @@ public class DomesticFacade {
 	private final PostService postService;
 	private final ReplyService replyService;
 	private final UserService userService;
+
+	public void fetchPostById(final Long postId) {
+		postService.retrievePost(postId);
+	}
 }

@@ -11,6 +11,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '4.0.1'
     implementation group: 'org.springframework.cloud', name: 'spring-cloud-starter-openfeign', version: '3.0.3'
+    implementation group: 'org.json', name: 'json', version: '20090211'
 
     // API 모듈
     implementation project(':module-redis')
