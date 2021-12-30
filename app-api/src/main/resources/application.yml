@@ -10,3 +10,5 @@ spring :
         show_sql: true
         format_sql: true
 
+external:
+  api: external.api
