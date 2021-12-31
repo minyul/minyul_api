@@ -44,4 +44,5 @@ repositories {
 
 dependencies {
 	implementation project(':app-api')
+	implementation project(':practice-field')
 }
