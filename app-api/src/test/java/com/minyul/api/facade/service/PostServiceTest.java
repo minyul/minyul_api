@@ -1,6 +1,7 @@
 package com.minyul.api.facade.service;
 
 import com.minyul.api.dto.post.PostDto;
+import com.minyul.api.exception.PostNotFoundException;
 import com.minyul.rds.entity.Post;
 import com.minyul.rds.repository.PostRepository;
 import org.junit.jupiter.api.Assertions;
@@ -38,6 +39,16 @@ class PostServiceTest {
 
 		// 동일한지
 		Assertions.assertEquals(resultPost.getId(), PostDto.of(post).getId());
+		verify(postRepository).findById(anyLong());
+	}
+
+	@DisplayName("해당 Id에 맞는 피드가 존재하지 않을 때 예외를 던진다.")
+	@Test
+	void test_retrieve_post_exception() {
+		// 해당 Id에 맞는 리소스가 비어있을 때.
+		given(postRepository.findById(anyLong())).willReturn(Optional.empty());
+
+		Assertions.assertThrows(PostNotFoundException.class, () -> postService.retrievePost(anyLong()));
 		verify(postRepository).findById(anyLong());
 	}
 }
