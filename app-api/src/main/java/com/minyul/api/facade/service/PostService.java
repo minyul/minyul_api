@@ -19,6 +19,9 @@ public class PostService {
 	private final ObjectMapper objectMapper;
 	private final PostRepository postRepository;
 
+	/**
+	 * JPA 에서 제공하는 EntityNotFoundException도 있음. orElseThrow(EntityNotFoundException::new) 가능
+	 */
 	public PostDto retrievePost(final Long postId) {
 		Post post = postRepository.findById(postId).orElseThrow(() -> new PostNotFoundException("Not Found Post"));
 		return PostDto.of(post);
