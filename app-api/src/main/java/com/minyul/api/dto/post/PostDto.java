@@ -1,13 +1,14 @@
 package com.minyul.api.dto.post;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.minyul.rds.entity.Post;
 import lombok.*;
 
 import java.util.List;
 
 /**
- *  :  minyul
  *  Response Naming : [Domain][Role]Dto
+ 		@author : Minyul
  */
 @Getter
 @Builder
@@ -24,4 +25,11 @@ public class PostDto {
 
 	@JsonIgnore
 	private final String type = "NORMAL";
+
+	public static PostDto of(Post post) {
+		return PostDto.builder()
+						.id(post.getId())
+						.title(post.getTitle())
+						.build();
+	}
 }

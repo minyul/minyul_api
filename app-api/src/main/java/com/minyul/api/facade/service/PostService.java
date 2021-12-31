@@ -2,6 +2,7 @@ package com.minyul.api.facade.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.minyul.api.dto.post.PostDto;
+import com.minyul.api.exception.PostNotFoundException;
 import com.minyul.rds.entity.Post;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -9,8 +10,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import com.minyul.rds.repository.PostRepository;
-
-import java.util.Optional;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -21,11 +20,15 @@ public class PostService {
 	private final PostRepository postRepository;
 
 	public PostDto retrievePost(final Long postId) {
-		Optional<Post> post = postRepository.findById(postId);
-		post.get();
-		return null;
+		Post post = postRepository.findById(postId).orElseThrow(() -> new PostNotFoundException("Not Found Post"));
+		return PostDto.of(post);
 	}
 
+	/**
+	 * .json 으로 갖고 오는 [ frontend 에 mockData 보낼 때 ]
+	 * @return : Post Mock Data
+	 * @autor : Minyul
+	 */
 	public PostDto retrievePostByMockData() {
 		try {
 

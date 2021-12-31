@@ -23,10 +23,11 @@ public class ExternalApi {
 
 	private final static String COMMON_PARAM = "min_yul";
 
-	private final RestTemplate restTemplate;
+	// Todo : 주입 No
+	// private final RestTemplate restTemplate;
 
 	@Value("${external.api}")
-	private final String externalUrl;
+	private String externalUrl;
 
 	public ExternalDto externalData(String searchWord, Pageable pageable) {
 		URI uri = commonParamsBuilder(externalUrl(), pageable)
@@ -40,6 +41,10 @@ public class ExternalApi {
 	private ExternalDto fetch(URI uri) {
 		HttpHeaders headers = new HttpHeaders();
 		try {
+
+			// Todo : 임시
+			RestTemplate restTemplate = new RestTemplate();
+
 			ResponseEntity<ExternalDto> response =
 							restTemplate.exchange(uri, HttpMethod.GET, new HttpEntity<>(headers), ExternalDto.class);
 
