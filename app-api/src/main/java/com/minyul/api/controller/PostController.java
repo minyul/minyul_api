@@ -18,6 +18,14 @@ public class PostController {
 
 	private final DomesticFacade domesticFacade;
 
+
+	/**
+	 * HttpEntity<T> 를 상속받았다. 이유는 !? stauts 를 사용할 수 없다. HtppEntity는 !
+	 * private final Object status
+	 *
+	 * @return ResponseEntity<T>
+	 * @author : Minyul
+	 */
 	@GetMapping("/posts/{post_id}")
 	public ResponseEntity<PostDto> retrievePost(@PathVariable(value = "post_id") final Long postId) {
 		return ResponseEntity.ok(domesticFacade.fetchPostById(postId));

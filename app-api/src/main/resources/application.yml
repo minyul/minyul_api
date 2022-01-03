@@ -1,14 +1,17 @@
 spring :
   datasource:
-    jdbcUrl: jdbc:mysql://localhost:3306/news?useSSL=false&serverTimezone=Asia/Seoul
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/news?useSSL=false&serverTimezone=Asia/Seoul
     username: root
     password: 1234
     maximumPoolSize: 5
   jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect   # 일단 대기 ! ! !
     properties:
       hibernate:
         show_sql: true
         format_sql: true
+
 
 external:
   api: external.api
