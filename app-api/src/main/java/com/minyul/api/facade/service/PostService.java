@@ -24,6 +24,7 @@ public class PostService {
 	 */
 	public PostDto retrievePost(final Long postId) {
 		Post post = postRepository.findById(postId).orElseThrow(() -> new PostNotFoundException("Not Found Post"));
+
 		return PostDto.of(post);
 	}
 

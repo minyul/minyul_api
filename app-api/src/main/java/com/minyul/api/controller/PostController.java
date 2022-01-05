@@ -28,6 +28,7 @@ public class PostController {
 	 */
 	@GetMapping("/posts/{post_id}")
 	public ResponseEntity<PostDto> retrievePost(@PathVariable(value = "post_id") final Long postId) {
+
 		return ResponseEntity.ok(domesticFacade.fetchPostById(postId));
 	}
 }

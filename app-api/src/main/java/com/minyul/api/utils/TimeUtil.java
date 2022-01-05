@@ -94,9 +94,19 @@ public class TimeUtil {
 			SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
 
 			return new Timestamp ((dateFormat.parse(time)).getTime());
-		}catch (ParseException exception) {
-			log.info("Time Utils ERROR : {}", exception.getMessage());
-			throw new RuntimeException(exception.getMessage());
+		}catch (ParseException parseException) {
+
+			/**
+			 * log.error("{}, {}", e.getMessage(), e); : 이것 같은 경우 보안상 좋지않을 수 있다. 근데
+			 * 에러 찾기는 개편한데 말이지.. 흠
+			 * e.printStackTrace 같은 경우에는 System.err 기에 쓰면 안된다.
+			 *
+			 * 또한, 하나의 예시일 뿐, Util에는 보통 NPE, PARSE 에 대한 에러로 예측가능하므로 굳이 log를 안찍어도..
+			 */
+
+			log.error("Time Utils ERROR - PARAM : {}, MESSAGE {}", time, parseException.getMessage());
+
+			throw new RuntimeException(parseException.getMessage());
 		}
 	}
 }
