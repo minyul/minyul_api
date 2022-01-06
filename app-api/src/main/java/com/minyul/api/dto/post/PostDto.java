@@ -47,6 +47,7 @@ public class PostDto {
 	@NoArgsConstructor
 	@AllArgsConstructor
 	public static class News {
+
 		private String title;
 		private String content;
 

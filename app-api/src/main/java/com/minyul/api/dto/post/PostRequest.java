@@ -12,6 +12,7 @@ import org.hibernate.validator.constraints.Length;
 @Getter
 public class PostRequest {
 
+	@Length(max = 3)
 	private String title;
 	private String content;
 

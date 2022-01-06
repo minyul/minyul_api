@@ -34,7 +34,7 @@ public class PostController {
 	}
 
 	@PostMapping("/posts")
-	public void createPost(@RequestBody final PostRequest postRequest) {
+	public void createPost(@RequestBody @Valid final PostRequest postRequest) {
 
 		log.info("PostRequest value : {}", postRequest.toString());
 		domesticFacade.createPost(postRequest);
