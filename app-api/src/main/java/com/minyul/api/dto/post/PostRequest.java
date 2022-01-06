@@ -1,9 +1,9 @@
 package com.minyul.api.dto.post;
 
 /**
- *  :  minyul
- *  Request Dto 의 Naming : [ ]Request
- *  Param Dto  -  : [ ]Param or [ ]Cond
+ * Request Dto 의 Naming : [ ]Request
+ * Param Dto  -  : [ ]Param or [ ]Cond
+ * @author : Minyul
  */
 public class PostRequest {
 
