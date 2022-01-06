@@ -1,6 +1,7 @@
 package com.minyul.api.facade;
 
 import com.minyul.api.dto.post.PostDto;
+import com.minyul.api.dto.post.PostRequest;
 import com.minyul.api.facade.service.PostService;
 import com.minyul.api.facade.service.ReplyService;
 import com.minyul.api.facade.service.UserService;
@@ -17,5 +18,9 @@ public class DomesticFacade {
 
 	public PostDto fetchPostById(final Long postId) {
 		return postService.retrievePost(postId);
+	}
+
+	public void createPost(final PostRequest postRequest) {
+		postService.createPost(postRequest);
 	}
 }

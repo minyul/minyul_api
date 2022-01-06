@@ -1,14 +1,15 @@
 package com.minyul.api.controller;
 
 import com.minyul.api.dto.post.PostDto;
+import com.minyul.api.dto.post.PostRequest;
 import com.minyul.api.facade.DomesticFacade;
+import com.minyul.rds.entity.Post;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Slf4j
 @RequestMapping("/domestic")
@@ -30,5 +31,13 @@ public class PostController {
 	public ResponseEntity<PostDto> retrievePost(@PathVariable(value = "post_id") final Long postId) {
 
 		return ResponseEntity.ok(domesticFacade.fetchPostById(postId));
+	}
+
+	@PostMapping("/posts")
+	public void createPost(@RequestBody final PostRequest postRequest) {
+
+		log.info("PostRequest value : {}", postRequest.toString());
+		domesticFacade.createPost(postRequest);
+		// return ResponseEntity.ok(domesticFacade.createPost(postRequest));
 	}
 }

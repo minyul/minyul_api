@@ -2,6 +2,7 @@ package com.minyul.api.facade.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.minyul.api.dto.post.PostDto;
+import com.minyul.api.dto.post.PostRequest;
 import com.minyul.api.exception.PostNotFoundException;
 import com.minyul.rds.entity.Post;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +27,11 @@ public class PostService {
 		Post post = postRepository.findById(postId).orElseThrow(() -> new PostNotFoundException("Not Found Post"));
 
 		return PostDto.of(post);
+	}
+
+	public void createPost(final PostRequest postRequest) {
+
+		// postRepository.save();
 	}
 
 	/**
