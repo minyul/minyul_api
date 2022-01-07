@@ -1,6 +1,7 @@
 buildscript {
 	ext {
 		springBootVersion = '2.4.5'
+		autor = 'Minyul'
 	}
 	repositories {
 		mavenCentral()
@@ -49,4 +50,5 @@ dependencies {
 
 task hello {
 	println 'hello ggomjae'
+	println autor              /* ext 에 전역으로 변수 설정하고 출력 가능.*/
 }
