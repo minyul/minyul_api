@@ -1,27 +1,45 @@
-buildscript {
-	ext {
+buildscript {                       /* 빌드를 하는 동안 필요한 처리를 모아 놓는 곳.  */
+	ext {  /*멀티모듈에서 보는 것이고 gradle의 모든 task에서 사용할 수 있는 전역변수르 선언하는 블록*/
 		springBootVersion = '2.4.5'
 		autor = 'Minyul'
 	}
 	repositories {
+		/* 	오픈 소스 라이브러리를 호스팅(공유)하는 저장소
+		 *  mavenCentral은 이 먼저 나왔고 JCental이 후발자로 나옴. JCental 쓰는 것이 좋음. 더 간단한 워크플로우
+		 */
 		mavenCentral()
+
 	}
+	/*
+	 *  의존성을 관리하는 프로퍼티. 필요한 라이브러리 등의 정보를 기술하면 그 라이브
+     *  러리를 참조 할 수 있다.
+	 */
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
 		classpath "io.spring.gradle:dependency-management-plugin:1.0.11.RELEASE"
 	}
 }
 
+/* 멀티모듈
+ * allprojects : 전체 프로젝트에 동작하는 설정
+ * subprojects : 하위 프로젝트에만 동작하는 설정
+ * project : 해당 하는 프로젝트에만 동작하는 설정
+ */
 allprojects {
+
+	/*
+	 * 해당 Java 플로그인으로 인해 src/main/java 프로덕트 코드
+	 * 테스트 코드는 src/test/java  등등..
+	 */
 	apply plugin: 'java'
 	apply plugin: 'eclipse'
 	apply plugin: 'idea'
 	apply plugin: 'org.springframework.boot'
 	apply plugin: 'io.spring.dependency-management'
 
-	group = 'com.minyul'
-	version = '0.0.1-SNAPSHOT'
-	sourceCompatibility = '11'
+	group = 'com.minyul'       /* 프로젝트 생성시 groupId */
+	version = '0.0.1-SNAPSHOT' /* 애플리케이션 버전이고 SNAPSHOT 이면 개발 단계라는 뜻. */
+	sourceCompatibility = '11' /* 자바 버전으로 컴파일하겠다는 뜻. ex ) 1.8*/
 
 	repositories {
 		mavenCentral()
@@ -34,6 +52,7 @@ allprojects {
 			exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 		}
 	}
+	/* 테스트 실행시 JUnit 플랫폼(JUnit 5)이라는 것을 정의 */
 	test {
 		useJUnitPlatform()
 	}
@@ -52,3 +71,43 @@ task hello {
 	println 'hello ggomjae'
 	println autor              /* ext 에 전역으로 변수 설정하고 출력 가능.*/
 }
+
+/*
+
+@author : Minyul 걍 블로그대신 여기에 대강 정리
+
+Gradle : Build Tool -
+Build : 소프트웨어가 제품으로 만들어지는 일련의 과정들
+         컴파일, 테스트, 배포, 문서화 등의 작업들 전부
+
+Gradle : groovy 언어를 사용함 ( JVM 기반의 동적 타이핑 언어 )
+But -> Gradle 은 groovy 기반의 DSL을 사용함
+
+DSL : 기반이 언어에 있지만 그 언어 그자체가 아니라 특정한 용도에 맞게
+해당 언어를 각색한 것. 즉슨, gradle dsl 이라고함
+
+build.gradle : 빌드 작업에 필요한 기본 설정, 동작등을 정의 하는 파일
+
+gradlew, gradlew.bat 2개의 Gradle 명령. bat이 붙어있는것이 windows용
+
+plugins - 프로젝트를 빌드하기 위해 여러 작업 필요. 예를 들면 컴파일, jar파일의
+생성 같은 작업들. 이런 작업을 해주는 플러그인이 존재함. 이러한 플러그인 지정
+이러한 플로그인들은 필요한 과정들을  task로 포함함. 필요한 모든 과정을
+플러그인의 내부 task가 진행해주게됨.
+
+ex )
+  plugins {
+        id 'org.springframework.boot' version '2.3.1.RELEASE'
+        id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+        id 'java'
+    }
+
+여기서 task라는 것은 프로젝트의 작업 단위다.
+두 가지 종류의 task가 있다.
+1. gradle 내부에 있는 내장의 task ( clean, jar, run 등 )
+2. build.gradle 파일에 사용자가 정의해 사용하는 task
+내장된 task는 gradle [task명] 명령어로 실행해 확인 가능
+
+실제 task는 groovy 코드를 이용해 배포 혹은 빌드를
+위한 전처리/후처리 작업등을 아주 효과적으로 사용할 수 있음.
+ */
