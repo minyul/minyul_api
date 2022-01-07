@@ -46,3 +46,7 @@ dependencies {
 	implementation project(':app-api')
 	implementation project(':practice-field')
 }
+
+task hello {
+	println 'hello ggomjae'
+}
