@@ -1,8 +1,10 @@
 buildscript {                       /* 빌드를 하는 동안 필요한 처리를 모아 놓는 곳.  */
+
 	ext {  /*멀티모듈에서 보는 것이고 gradle의 모든 task에서 사용할 수 있는 전역변수르 선언하는 블록*/
 		springBootVersion = '2.4.5'
 		autor = 'Minyul'
 	}
+
 	repositories {
 		/* 	오픈 소스 라이브러리를 호스팅(공유)하는 저장소
 		 *  mavenCentral은 이 먼저 나왔고 JCental이 후발자로 나옴. JCental 쓰는 것이 좋음. 더 간단한 워크플로우
@@ -10,6 +12,7 @@ buildscript {                       /* 빌드를 하는 동안 필요한 처리�
 		mavenCentral()
 
 	}
+
 	/*
 	 *  의존성을 관리하는 프로퍼티. 필요한 라이브러리 등의 정보를 기술하면 그 라이브
      *  러리를 참조 할 수 있다.
@@ -25,7 +28,13 @@ buildscript {                       /* 빌드를 하는 동안 필요한 처리�
  * subprojects : 하위 프로젝트에만 동작하는 설정
  * project : 해당 하는 프로젝트에만 동작하는 설정
  */
+
 allprojects {
+	group = 'com.minyul'       /* 프로젝트 생성시 groupId */
+	version = '0.0.1-SNAPSHOT' /* 애플리케이션 버전이고 SNAPSHOT 이면 개발 단계라는 뜻. */
+}
+
+subprojects {
 
 	/*
 	 * 해당 Java 플로그인으로 인해 src/main/java 프로덕트 코드
@@ -37,8 +46,6 @@ allprojects {
 	apply plugin: 'org.springframework.boot'
 	apply plugin: 'io.spring.dependency-management'
 
-	group = 'com.minyul'       /* 프로젝트 생성시 groupId */
-	version = '0.0.1-SNAPSHOT' /* 애플리케이션 버전이고 SNAPSHOT 이면 개발 단계라는 뜻. */
 	sourceCompatibility = '11' /* 자바 버전으로 컴파일하겠다는 뜻. ex ) 1.8*/
 
 	repositories {
@@ -52,19 +59,21 @@ allprojects {
 			exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 		}
 	}
-	/* 테스트 실행시 JUnit 플랫폼(JUnit 5)이라는 것을 정의 */
+
 	test {
 		useJUnitPlatform()
 	}
 }
 
-repositories {
-	mavenCentral()
-}
-
-dependencies {
-	implementation project(':app-api')
-	implementation project(':practice-field')
+/**
+ * project의 경우 하위 프로젝트간의 의존성을 관리
+ */
+project(':app-api') {
+	dependencies {
+		implementation project(':module-redis')
+		implementation project(':module-session')
+		implementation project(':module-rds')
+	}
 }
 
 task hello {

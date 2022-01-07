@@ -18,9 +18,4 @@ dependencies {
 
     // Scheduler Test
     testImplementation group: 'org.awaitility', name: 'awaitility', version: '3.0.0'
-
-    // API 모듈
-    implementation project(':module-redis')
-    implementation project(':module-session')
-    implementation project(':module-rds')
 }
