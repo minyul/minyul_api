@@ -2,6 +2,7 @@ package com.minyul.api.dto.post;
 
 import com.minyul.rds.entity.Post;
 import lombok.Getter;
+import lombok.Setter;
 import org.hibernate.validator.constraints.Length;
 
 /**
@@ -15,6 +16,15 @@ public class PostRequest {
 	@Length(max = 3)
 	private String title;
 	private String content;
+
+	public PostRequest() {
+		//
+	}
+
+	public PostRequest(String title, String content) {
+		this.title = title;
+		this.content = content;
+	}
 
 	public Post toEntity() {
 
