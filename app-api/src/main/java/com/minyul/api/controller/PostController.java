@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.net.URI;
 
 @Slf4j
 @RequestMapping("/domestic")
@@ -33,11 +34,12 @@ public class PostController {
 		return ResponseEntity.ok(domesticFacade.fetchPostById(postId));
 	}
 
+	// Response 그냥 임시로 박아놓은거임. 딱히 의미 없음. ㅋ_ㅋ
 	@PostMapping("/posts")
-	public void createPost(@RequestBody @Valid final PostRequest postRequest) {
-
+	public ResponseEntity<DomesticFacade.CreateTempResponse> createPost(@RequestBody @Valid final PostRequest postRequest) {
 		log.info("PostRequest value : {}", postRequest.toString());
 		domesticFacade.createPost(postRequest);
-		// return ResponseEntity.ok(domesticFacade.createPost(postRequest));
+
+		return ResponseEntity.created(URI.create("/posts/" + 1)).body(domesticFacade.createPost(postRequest));
 	}
 }

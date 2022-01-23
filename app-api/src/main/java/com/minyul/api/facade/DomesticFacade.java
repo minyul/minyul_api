@@ -5,6 +5,8 @@ import com.minyul.api.dto.post.PostRequest;
 import com.minyul.api.facade.service.PostService;
 import com.minyul.api.facade.service.ReplyService;
 import com.minyul.api.facade.service.UserService;
+import lombok.Builder;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -20,7 +22,18 @@ public class DomesticFacade {
 		return postService.retrievePost(postId);
 	}
 
-	public void createPost(final PostRequest postRequest) {
+	public CreateTempResponse createPost(final PostRequest postRequest) {
 		postService.createPost(postRequest);
+
+		return new CreateTempResponse();
+	}
+
+	@Getter
+	public static class CreateTempResponse {
+		private final String temp = "temp";
+
+		public CreateTempResponse() {
+			//
+		}
 	}
 }
