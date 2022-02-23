@@ -8,6 +8,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
+import org.springframework.util.StopWatch;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
@@ -26,6 +27,8 @@ public class PracticeApp {
 	public ApplicationRunner applicationRunner() {
 
 		return args -> {
+			StopWatch stopWatch = new StopWatch();
+			stopWatch.start();
 			RestTemplate restTemplate = restTemplateBuilder.build();
 			GitHubResponse[] response1 =
 							restTemplate.getForObject("https://api.github.com/users/minyul/repos", GitHubResponse[].class);
@@ -34,6 +37,8 @@ public class PracticeApp {
 			GitHubCommitResponse[] response2 =
 							restTemplate.getForObject("https://api.github.com/repos/minyul/IndexInMyHead/commits", GitHubCommitResponse[].class);
 			Arrays.stream(response2).forEach(System.out::println);
+			stopWatch.stop();
+			System.out.println(stopWatch.prettyPrint());
 		};
 	}
 }
