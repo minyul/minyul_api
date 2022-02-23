@@ -12,7 +12,5 @@ class OrderStateTest {
 	@Test
 	void test_enum() {
 		OrderState preparing = OrderState.PREPARING;
-		System.out.println(preparing.);
 	}
-
 }
