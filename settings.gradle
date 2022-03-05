@@ -4,4 +4,5 @@ include 'module-session'
 include 'module-redis'
 include 'module-rds'
 include 'practice-field'
+include 'module-kafka'
 
