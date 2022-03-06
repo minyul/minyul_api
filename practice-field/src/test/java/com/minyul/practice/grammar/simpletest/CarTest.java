@@ -26,4 +26,17 @@ class CarTest {
 		// then
 		assertThat(car.position()).isEqualTo(1);
 	}
+
+	@DisplayName("5 이상 일 때, 전진한다")
+	@Test
+	void number_4_move() {
+		// given
+		MoveStrategy moveStrategy = new TestStrategy(5);
+
+		// when
+		car.move(moveStrategy);
+
+		// then
+		assertThat(car.position()).isEqualTo(1);
+	}
 }
