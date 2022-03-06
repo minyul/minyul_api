@@ -1,4 +1,6 @@
-package com.minyul.practice.grammar.simpletest;
+package com.minyul.practice.grammar.simpletest.random_test;
+
+import com.minyul.practice.grammar.simpletest.random_test.MoveStrategy;
 
 public class TestStrategy implements MoveStrategy {
 

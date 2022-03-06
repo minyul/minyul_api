@@ -1,4 +1,4 @@
-package com.minyul.practice.grammar.simpletest;
+package com.minyul.practice.grammar.simpletest.random_test;
 
 public class Car {
 

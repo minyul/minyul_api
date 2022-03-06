@@ -1,4 +1,4 @@
-package com.minyul.practice.grammar.simpletest;
+package com.minyul.practice.grammar.simpletest.random_test;
 
 import java.util.Random;
 
