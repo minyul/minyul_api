@@ -8,5 +8,7 @@ bootJar {
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.13'
+
     // implementation group: 'org.springframework.integration', name: 'spring-integration-core', version: '5.5.8'
 }
