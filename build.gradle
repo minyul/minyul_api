@@ -2,6 +2,7 @@ buildscript {                       /* 빌드를 하는 동안 필요한 처리�
 
 	ext {  /*멀티모듈에서 보는 것이고 gradle의 모든 task에서 사용할 수 있는 전역변수르 선언하는 블록*/
 		springBootVersion = '2.4.5'
+		kotlinVersion = '1.6.10'
 		autor = 'Minyul'
 	}
 
@@ -20,6 +21,11 @@ buildscript {                       /* 빌드를 하는 동안 필요한 처리�
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
 		classpath "io.spring.gradle:dependency-management-plugin:1.0.11.RELEASE"
+
+		// Kotlin
+		classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
+		classpath("org.jetbrains.kotlin:kotlin-allopen:${kotlinVersion}")
+		classpath("org.jetbrains.kotlin:kotlin-noarg:${kotlinVersion}")
 	}
 }
 
@@ -46,13 +52,33 @@ subprojects {
 	apply plugin: 'org.springframework.boot'
 	apply plugin: 'io.spring.dependency-management'
 
+	// Kotlin
+	apply plugin: 'kotlin'
+	apply plugin: 'kotlin-spring'
+
 	sourceCompatibility = '11' /* 자바 버전으로 컴파일하겠다는 뜻. ex ) 1.8*/
 
 	repositories {
 		mavenCentral()
 	}
 
+	compileKotlin {
+		kotlinOptions {
+			jvmTarget = "11"
+		}
+	}
+	compileTestKotlin {
+		kotlinOptions {
+			jvmTarget = "11"
+		}
+	}
+
 	dependencies {
+		// Kotlin
+		implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+		implementation("org.jetbrains.kotlin:kotlin-reflect")
+		implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+
 		compileOnly 'org.projectlombok:lombok'
 		annotationProcessor 'org.projectlombok:lombok'
 		testImplementation('org.springframework.boot:spring-boot-starter-test') {

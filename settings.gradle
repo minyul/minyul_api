@@ -5,4 +5,4 @@ include 'module-redis'
 include 'module-rds'
 include 'practice-field'
 include 'module-kafka'
-
+include 'app-cms'
