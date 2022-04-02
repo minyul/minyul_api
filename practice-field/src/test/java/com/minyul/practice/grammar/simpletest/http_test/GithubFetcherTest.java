@@ -1,12 +1,19 @@
 package com.minyul.practice.grammar.simpletest.http_test;
 
+import com.minyul.practice.grammar.GitHubCommitResponse;
+import com.minyul.practice.grammar.GitHubResponse;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
+import java.util.Arrays;
+
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -27,5 +34,20 @@ class GithubFetcherTest {
 	@Test
 	void test() {
 		githubService.findGitHubContent();
+	}
+
+	@DisplayName("아짜증낭")
+	@Test
+	void webClientTest() {
+		WebClient webClient = WebClient.builder().baseUrl("https://api.github.com").build();
+		GitHubResponse[] reposeMonoResult = webClient.get().uri("/users/minyul/repos")
+				.retrieve()
+				.bodyToMono(GitHubResponse[].class).block();
+
+		Arrays.asList(reposeMonoResult).forEach(data -> {
+			System.out.println(data.getId() + " : " + data.getName() + " \n");
+		});
+
+		assertThat(reposeMonoResult.length).isEqualTo(30);
 	}
 }
